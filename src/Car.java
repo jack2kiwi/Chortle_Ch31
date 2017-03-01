@@ -2,35 +2,43 @@ import java.util.Scanner;
 
 class Car
 {
-  // instance variables
+
   double startMiles;   // Stating odometer reading
-  double endMiles;     // Ending odometer reading
-  double gallons;      // Gallons of gas used between the readings
+  
 
   // constructor
-  public Car(){
-	  Scanner reader = new Scanner(System.in);
-	  System.out.println("Enter first reading:");
-	  startMiles = reader.nextDouble();
-	  System.out.println("Enter second reading:");
-	  endMiles = reader.nextDouble();
-	  System.out.println("Enter gallons:");
-	  gallons = reader.nextDouble();
+  public Car(double odometer){
+	  startMiles = odometer;
+  }
+  
+  void fillUp(int miles, double gallons) {
+	  System.out.println("filling station visit");
+	  System.out.println("odometer");
+	  System.out.println(startMiles);
+	  System.out.println("gallons to fill tank");
+	  System.out.println(gallons);
+	  System.out.println("Miles per gallon:" + calculateMPG(miles, gallons));
+	  if (gasHog(miles, gallons)) {
+		  System.out.println("Gas Hog!");
+	  } else if (economyCar(miles, gallons)) {
+		  System.out.println("Economy Car!");
+	  }
+	  startMiles = miles;
   }
   
 
   // methods
-  double calculateMPG()
+  public double calculateMPG(int miles, double gallons)
   {
-    return  (endMiles - startMiles)/gallons;
+    return  (miles - startMiles)/gallons;
   }
   
-  boolean gasHog() {
-	 return (15.0 > this.calculateMPG());
+  public boolean gasHog(int miles, double gallons) {
+	 return (15.0 > this.calculateMPG(miles, gallons));
   }
   
-  boolean economyCar() {
-	  return (30.0 < this.calculateMPG());
+  public boolean economyCar(int miles, double gallons) {
+	  return (30.0 < this.calculateMPG(miles, gallons));
   }
 
 }
